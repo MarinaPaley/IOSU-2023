@@ -8,5 +8,5 @@ create table vendors
 
 --drop table vendor;
 
-alter table products 
+alter table vendors 
 add constraint ux_name_vendors unique("name");

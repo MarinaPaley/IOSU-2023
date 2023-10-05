@@ -6,9 +6,16 @@ create table purshaisings
     , price money not null
     , "count" int not null
     , purshaising_date date not null
-    , constraint id_purshaising primary key (id)
-    , constraint fk_product_purshaising foreign key (id_product)
-      references products (id)
-    , constraint fk_vendor_purshaising foreign key (id_vendor)
-      references vendors(id)
 );
+
+alter table purshaisings
+add constraint pk_purshaisings primary key (id);
+
+alter table purshaisings
+add constraint fk_product_purshaisings foreign key (id_product)
+      references products (id);
+     
+alter table purshaisings
+add constraint fk_vendor_purshaisings foreign key (id_vendor)
+      references vendors(id);
+      

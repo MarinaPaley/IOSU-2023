@@ -6,9 +6,16 @@ create table sales
     , price money not null
     , "count" int not null
     , sales_date date not null
-    , constraint id_sales primary key (id)
-    , constraint fk_product_sales foreign key (id_product)
-      references products (id)
-    , constraint fk_vendor_sales foreign key (id_vendor)
-      references vendors(id)
 );
+
+alter table sales
+add constraint pk_sales primary key (id);
+
+alter table sales
+add constraint fk_product_sales foreign key (id_product)
+      references products (id);
+     
+alter table sales
+add constraint fk_vendor_sales foreign key (id_vendor)
+      references vendors(id);
+      
