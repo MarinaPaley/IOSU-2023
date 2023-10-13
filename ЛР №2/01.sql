@@ -38,6 +38,7 @@ SELECT
       , MIN(price)
       , avg(price::money::numeric::float8)
       , count(price)
+      , sum(price)
       , purshaising_date
       , product_name 
 FROM public.v_purshaisings
