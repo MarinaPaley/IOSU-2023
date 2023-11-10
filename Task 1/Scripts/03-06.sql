@@ -3,6 +3,7 @@
 --больше $3000000 и меньше $5000000. Использовать оператор BETWEEN.
 SELECT 
     "TerritoryID"
+    "BusinessEntityID"
   , "Name"
   , "Group"
   , "SalesYTD"
