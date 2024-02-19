@@ -1,0 +1,53 @@
+ALTER TABLE "Purchase"
+ALTER COLUMN "ID"
+SET NOT NULL;
+
+ALTER TABLE "Purchase"
+ADD CONSTRAINT "PK_Purchase"
+PRIMARY KEY ("ID");
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "ID_Product"
+SET NOT NULL;
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "ID_Vendor"
+SET NOT NULL;
+
+ALTER TABLE "Purchase"
+ADD CONSTRAINT "FK_Product_Purchase"
+FOREIGN KEY ("ID_Product")
+REFERENCES "Product" ("ID");
+
+ALTER TABLE "Purchase"
+ADD CONSTRAINT "FK_Vendor_Purchase"
+FOREIGN KEY ("ID_Vendor")
+REFERENCES "Vendor" ("ID");
+
+
+ALTER TABLE "Purchase"
+ADD CONSTRAINT "CH_Purchase_Price"
+CHECK ("PricePurchase" > 0);
+
+ALTER TABLE "Purchase"
+ADD CONSTRAINT "CH_Purchase_Amount"
+CHECK ("Amount" > 0);
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "DatePurchase"
+SET DEFAULT CURRENT_DATE;
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "PricePurchase"
+SET NOT NULL;
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "DatePurchase"
+SET NOT NULL;
+
+ALTER TABLE "Purchase"
+ALTER COLUMN "Amount"
+SET NOT NULL;
+
+
+
