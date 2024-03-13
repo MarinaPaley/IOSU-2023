@@ -48,16 +48,12 @@ BEGIN
         RAISE EXCEPTION 'Не найден поставщик, %', vendor;
     END IF;
 
-    SELECT MAX(s."ID") INTO id FROM "Stores" s;
-
-    IF id IS NULL
-    THEN id = 1;
-    ELSE id = id + 1;
-    END IF;
+    SELECT * INTO id FROM public."fGetNextStoreID"();
 
     INSERT INTO "Stores" ("ID", "ID_Vendors", "ID_Products", "Amount", "Price", "Date")
     VALUES (id, id_vendor, id_product, amount, price, current_date);
 
+   RAISE NOTICE 'Вставлена запись о покупке сегодня ID = %', id;
 END;
 $$
 
