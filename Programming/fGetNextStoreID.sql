@@ -5,7 +5,7 @@ AS $$
 DECLARE
 	id INTEGER;
 BEGIN
-	PERFORM MAX(s."ID")
+	SELECT MAX(s."ID")
 	INTO id
 	FROM "Stores" s;
 	
