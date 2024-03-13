@@ -7,7 +7,7 @@ DECLARE
 BEGIN
 	PERFORM MAX(s."ID")
 	INTO id
-	FROM "Store" s;
+	FROM "Stores" s;
 	
 	IF id IS NULL
 	THEN
