@@ -1,3 +1,4 @@
+--DROP PROCEDURE "pMakeStore";
 CREATE PROCEDURE "pMakeStore"(
       IN product VARCHAR(25)
     , IN vendor VARCHAR(25)
@@ -9,6 +10,7 @@ DECLARE
       id_product INTEGER;
       id_vendor INTEGER;
       id INTEGER;
+      total_amount INTEGER;
 BEGIN
     IF product IS NULL OR product = ''
     THEN
@@ -32,7 +34,7 @@ BEGIN
 
     SELECT *
     INTO id_product
-    FROM public."fGetproductID"(product);
+    FROM public."fGetProductID"(product);
     
     IF id_product IS NULL
     THEN
@@ -53,8 +55,24 @@ BEGIN
     INSERT INTO "Stores" ("ID", "ID_Vendors", "ID_Products", "Amount", "Price", "Date")
     VALUES (id, id_vendor, id_product, amount, price, current_date);
 
-   RAISE NOTICE 'Вставлена запись о покупке сегодня ID = %', id;
+    SELECT SUM(s."Amount")
+    INTO total_amount
+    FROM "Items" s 
+    WHERE s."ID_Product" = id_product AND "ID_Vendor" = id_vendor;
+
+    IF total_amount IS NULL
+    THEN
+       total_amount = amount;
+    ELSE
+       total_amount = total_amount + amount;
+    END IF;
+    
+    SELECT * INTO id FROM public."fGetNextItemID"();
+
+    INSERT INTO "Items" ("ID", "ID_Product", "ID_Vendor", "Amount")
+    VALUES (id, id_product, id_vendor, total_amount);
+
+    RAISE NOTICE 'Вставлена запись о покупке сегодня ID = %', id;
+    COMMIT;
 END;
 $$
-
---DROP PROCEDURE public."pMakeStore"
