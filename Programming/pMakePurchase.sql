@@ -33,7 +33,7 @@ BEGIN
 
     SELECT *
     INTO id_product
-    FROM public."fGetproductID"(product);
+    FROM public."fGetProductID"(product);
     
     IF id_product IS NULL
     THEN
@@ -60,15 +60,17 @@ BEGIN
     END IF;
 
     UPDATE "Items"
-    SET "Amount" = "Amount" - total_amount;
+    SET "Amount" = "Amount" - amount;
 
-    SELECT * INTO id FROM public."fGetNextStoreID"();
+    SELECT * INTO id FROM public."fGetNextPurchasesID"();
 
-    INSERT INTO "Stores" ("ID", "ID_Vendors", "ID_Products", "Amount", "Price", "Date")
+    INSERT INTO "Purchases"  ("ID", "ID_Vendors", "ID_Products", "Amount", "Price", "Date")
     VALUES (id, id_vendor, id_product, amount, price, current_date);
 
-    RAISE NOTICE 'Вставлена запись о покупке сегодня ID = %', id;
-    COMMIT;
+    RAISE NOTICE 'Вставлена запись о продаже сегодня ID = %', id;
+
 END;
 $$
+
+--DROP PROCEDURE "pMakePurchase"
     

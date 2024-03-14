@@ -73,6 +73,5 @@ BEGIN
     VALUES (id, id_product, id_vendor, total_amount);
 
     RAISE NOTICE 'Вставлена запись о покупке сегодня ID = %', id;
-    COMMIT;
 END;
 $$

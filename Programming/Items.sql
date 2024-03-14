@@ -22,5 +22,17 @@ ADD CONSTRAINT "FK_Items_Vendors"
 FOREIGN KEY ("ID_Vendor")
 REFERENCES "Vendors"("ID"); 
 
+ALTER TABLE "Items"
+ALTER COLUMN "ID_Product" 
+SET NOT NULL;
+
+ALTER TABLE "Items"
+ALTER COLUMN "ID_Vendor" 
+SET NOT NULL;
+
+ALTER TABLE "Items"
+ALTER COLUMN "Amount"
+SET NOT NULL;
+
 SELECT SUM(s."Amount")
 FROM "Items" s

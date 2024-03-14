@@ -1,4 +1,4 @@
-CREATE FUNCTION "fGetproductID"("name" VARCHAR(25))
+CREATE FUNCTION "fGetProductID"("name" VARCHAR(25))
 RETURNS INTEGER AS 
 $$
     SELECT p."ID" 
